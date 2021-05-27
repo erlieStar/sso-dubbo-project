@@ -25,7 +25,7 @@ spring:
 
 dubbo:
   scan:
-    base-packages: com.javashitang.consumer.controller
+    base-packages: com.javashitang.sso.server.service
   registry:
     protocol: zookeeper
     address: www.javashitang.com:2181
