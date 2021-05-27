@@ -1,0 +1,21 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: sso-sample
+
+dubbo:
+  registry:
+    protocol: zookeeper
+    address: www.javashitang.com:2181
+  consumer:
+    # check 为 false 的话那么 consumer 启动时不会去检查 producer 启动与否
+    check: false
+    timeout: 60000
+
+javashitang:
+  sso:
+    enable: true
+    includePattern: /task/getInfo,/manage/getInfo,/location/getInfo
+    excludePattern:

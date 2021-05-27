@@ -1,0 +1,44 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: sso-server
+  datasource:
+    druid:
+      url:  jdbc:mysql://myhost:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false
+      driver-class-name:  com.mysql.jdbc.Driver
+      username:  test
+      password:  test
+      initial-size:  10
+      max-active:  50
+      min-idle:  10
+      max-wait:  60000
+      pool-prepared-statements:  true
+      max-pool-prepared-statement-per-connection-size:  20
+      validation-query:  SELECT 1 FROM DUAL
+      test-on-borrow:  false
+      test-on-return:  false
+      test-while-idle:  true
+      time-between-eviction-runs-millis:  60000
+      filters:  stat,wall
+
+dubbo:
+  scan:
+    base-packages: com.javashitang.consumer.controller
+  registry:
+    protocol: zookeeper
+    address: www.javashitang.com:2181
+  consumer:
+    # check 为 false 的话那么 consumer 启动时不会去检查 producer 启动与否
+    check: false
+    timeout: 60000
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+# 设置这个，主要是方便同域下的单点登陆，如多个系统在user.javashitang.com，task.javashitang.com
+# 就可以设置为.javashitang.com，这里设置为localhost
+cookie:
+  domain: localhost
