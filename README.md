@@ -20,19 +20,17 @@ mvn clean install -DskipTests=true
 
 ### 模块介绍
 
-1. eureka-server（eureka注册中心）
+1. sso-sample（单点登陆的client端）
 
-2. sso-sample（单点登陆的client端）
+2. sso-server（单点登陆的server端）
 
-3. sso-server（单点登陆的server端）
-
-4. sso-spring-boot-starter（单点登陆的starter）
+3. sso-spring-boot-starter（单点登陆的starter）
 
 ### 使用介绍
 
-注意：单点登陆的server端需要和client端需要注册到一个eureka集群上
+注意：单点登陆的server端需要和client端需要注册到一个zookeeper集群上
 
-测试的时候先启动eureka，再启动server端和client端
+测试的时候先启动zookeeper，再启动server端和client端
 
 加入单点登陆服务只需要加入如下starter
 
