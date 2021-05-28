@@ -1,6 +1,5 @@
 package com.javashitang.autoconfigure.sso;
 
-import com.javashitang.tool.JsonConvert;
 import com.javashitang.tool.OperStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
@@ -38,15 +37,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             if (StringUtils.isEmpty(tokenValue)) {
                 ResponseWrite.writeResult(response, OperStatus.newError("获取不到登陆用的cookie"));
             } else {
-                // 这里的result可以放用户的信息
-                OperStatus result = ssoServerClient.checkAuth(tokenValue);
+                OperStatus<UserBaseInfo> result = ssoServerClient.checkAuth(tokenValue);
                 if (!result.isSuccess()) {
                     ResponseWrite.writeResult(response, result);
                     return false;
                 } else {
                     // 将用户信息放到本次请求中
-                    String str = JsonConvert.obj2Str(result.getData());
-                    UserBaseInfo userBaseInfo = JsonConvert.str2Obj(str, UserBaseInfo.class);
+                    UserBaseInfo userBaseInfo = result.getData();
                     ParseUserInfo.setToRequest(request, userBaseInfo);
                 }
                 return true;
