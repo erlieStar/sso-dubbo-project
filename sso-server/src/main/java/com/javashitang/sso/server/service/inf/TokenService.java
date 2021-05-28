@@ -1,5 +1,6 @@
 package com.javashitang.sso.server.service.inf;
 
+import com.javashitang.autoconfigure.sso.UserBaseInfo;
 import com.javashitang.tool.OperStatus;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,5 +15,5 @@ public interface TokenService {
 
     OperStatus logout(String token, HttpServletResponse response);
 
-    OperStatus checkAuth(String token);
+    OperStatus<UserBaseInfo> checkAuth(String token);
 }

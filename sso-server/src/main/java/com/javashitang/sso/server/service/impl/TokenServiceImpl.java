@@ -1,11 +1,13 @@
 package com.javashitang.sso.server.service.impl;
 
+import com.javashitang.autoconfigure.sso.UserBaseInfo;
 import com.javashitang.sso.server.dao.UserInfoMapper;
 import com.javashitang.sso.server.po.UserInfo;
 import com.javashitang.sso.server.service.inf.TokenService;
 import com.javashitang.tool.MD5Util;
 import com.javashitang.tool.OperStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -76,13 +78,15 @@ public class TokenServiceImpl implements TokenService {
      * 通过token校验用户是否登陆这一步，可以加上缓存，将用户信息放到redis中，这里就不再演示了
      */
     @Override
-    public OperStatus checkAuth(String token) {
+    public OperStatus<UserBaseInfo> checkAuth(String token) {
         log.info("checkAuth param token: {}", token);
         UserInfo userInfo = userInfoMapper.selectByToken(token);
         if (userInfo == null || userInfo.getTokenExpire().isBefore(LocalDateTime.now())) {
             return OperStatus.newError("校验失败");
         }
-        return OperStatus.newSuccess(userInfo);
+        UserBaseInfo userBaseInfo = new UserBaseInfo();
+        BeanUtils.copyProperties(userInfo, userBaseInfo);
+        return OperStatus.newSuccess(userBaseInfo);
     }
 
     private String genToken(String username) {

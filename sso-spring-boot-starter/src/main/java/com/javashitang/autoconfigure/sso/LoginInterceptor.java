@@ -46,8 +46,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 } else {
                     // 将用户信息放到本次请求中
                     String str = JsonConvert.obj2Str(result.getData());
-                    UserInfo userInfo = JsonConvert.str2Obj(str, UserInfo.class);
-                    ParseUserInfo.setToRequest(request, userInfo);
+                    UserBaseInfo userBaseInfo = JsonConvert.str2Obj(str, UserBaseInfo.class);
+                    ParseUserInfo.setToRequest(request, userBaseInfo);
                 }
                 return true;
             }

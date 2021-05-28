@@ -11,5 +11,5 @@ public interface SsoServerClient {
     /**
      * 验证用户权限
      */
-    OperStatus checkAuth(String token);
+    OperStatus<UserBaseInfo> checkAuth(String token);
 }

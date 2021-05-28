@@ -1,6 +1,7 @@
 package com.javashitang.sso.server.service.impl;
 
 import com.javashitang.autoconfigure.sso.SsoServerClient;
+import com.javashitang.autoconfigure.sso.UserBaseInfo;
 import com.javashitang.sso.server.service.inf.TokenService;
 import com.javashitang.tool.OperStatus;
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +20,7 @@ public class SsoServerClientImpl implements SsoServerClient {
     private TokenService tokenService;
 
     @Override
-    public OperStatus checkAuth(String token) {
+    public OperStatus<UserBaseInfo> checkAuth(String token) {
         if (StringUtils.isBlank(token)) {
             return OperStatus.newParamInvalid("token不能为空");
         }

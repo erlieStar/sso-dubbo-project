@@ -9,16 +9,16 @@ public class ParseUserInfo {
 
     private static String USER_ATTRIBUTE_NAME = "userInfo";
 
-    public static UserInfo parseFromRequest(HttpServletRequest request) {
-        UserInfo userInfo = (UserInfo) request.getAttribute(USER_ATTRIBUTE_NAME);
+    public static UserBaseInfo parseFromRequest(HttpServletRequest request) {
+        UserBaseInfo userBaseInfo = (UserBaseInfo) request.getAttribute(USER_ATTRIBUTE_NAME);
         // 不会发生，但还是判断一下
-        if (userInfo == null) {
-            log.error("failed get userInfo from request");
+        if (userBaseInfo == null) {
+            log.error("failed get userBaseInfo from request");
         }
-        return userInfo;
+        return userBaseInfo;
     }
 
-    public static void setToRequest(HttpServletRequest request, UserInfo userInfo) {
-        request.setAttribute(USER_ATTRIBUTE_NAME, userInfo);
+    public static void setToRequest(HttpServletRequest request, UserBaseInfo userBaseInfo) {
+        request.setAttribute(USER_ATTRIBUTE_NAME, userBaseInfo);
     }
 }

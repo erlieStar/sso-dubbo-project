@@ -1,7 +1,7 @@
 package com.javashitang.sso.sample.controller;
 
 import com.javashitang.autoconfigure.sso.ParseUserInfo;
-import com.javashitang.autoconfigure.sso.UserInfo;
+import com.javashitang.autoconfigure.sso.UserBaseInfo;
 import com.javashitang.tool.OperStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +18,8 @@ public class LocationController {
     public OperStatus getInfo(HttpServletRequest request) {
         // 在各个系统中如果想获取登陆的用户信息，可以调用这个工具类方法
         // 因为在校验的时候，将用户信息设置到request中了
-        UserInfo userInfo = ParseUserInfo.parseFromRequest(request);
-        log.info("login userId: {}, username: {}", userInfo.getId(), userInfo.getUsername());
+        UserBaseInfo userBaseInfo = ParseUserInfo.parseFromRequest(request);
+        log.info("login userId: {}, username: {}", userBaseInfo.getId(), userBaseInfo.getUsername());
         return OperStatus.newSuccess("获取管理信息");
     }
 }
