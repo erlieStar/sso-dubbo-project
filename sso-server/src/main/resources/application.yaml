@@ -28,7 +28,7 @@ dubbo:
     base-packages: com.javashitang.sso.server.service
   registry:
     protocol: zookeeper
-    address: www.javashitang.com:2181
+    address: myhost:2181
   consumer:
     # check 为 false 的话那么 consumer 启动时不会去检查 producer 启动与否
     check: false
